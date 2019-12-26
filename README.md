@@ -1,5 +1,5 @@
 # Hydroponix
-For automated plant watering systems
+A plant watering system, automated with Raspberry Pi Model B+
 
 Main features:
 - 
