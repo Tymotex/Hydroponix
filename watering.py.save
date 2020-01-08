@@ -41,43 +41,26 @@ def GetHumidityAndTemp():
 if __name__ == '__main__':
 	while True:
 		print("=== Looping ===")
-		if isEnabled:
-			print("===> Enabled")
-			if GPIO.input(moistureSensor):
-				print("Dry")
-				off(relayTrigger)
-				off(statusLED)
-			else:
-				print("Wet")
-				on(relayTrigger)
-				on(statusLED)
-			data = GetHumidityAndTemp()
-			print('Temp={0:0.1f}°C  Humidity={1:0.1f}%'.format(data["temperature"], data["humidity"]))	
-			sleep(1)
+		if GPIO.input(moistureSensor):
+			print("Dry")
+		        off(relayTrigger)
+			off(statusLED)
 		else:
-			print("===> Disabled")
+			print("Wet")
+			on(relayTrigger)
+			on(statusLED)
+		
+		data = GetHumidityAndTemp()
+		print('Temp={0:0.1f}°C  Humidity={1:0.1f}%'.format(data["temperature"], data["humidity"]))	
+		
+		sleep(1)
 
 def ForceWater():
-        ForceWaterOn()
-        sleep(1)
-        ForceWaterOff()
-
-def ForceWaterOn():
-	print("===> FORCEWATER ON")
 	off(relayTrigger)
 	on(statusLED)
-
-def ForceWaterOff():
-        print("==> FORCEWATER OFF")
-        on(relayTrigger)
-        on(statusLED)
-
-def EnableAutoWatering():
-        print("===> Enabling auto watering")
-
-
-def DisableAutoWatering():
-        pritn("===> Disabling auto watering")
+		sleep(1)
+	on(relayTrigger)
+	on(statusLED)
 
 def GetLastWatered():
 	print("===> Getting last watered")

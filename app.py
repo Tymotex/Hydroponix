@@ -39,5 +39,26 @@ def main():
 	templateData = template()  # Calls GetLastWatered which returns a string containing the last time automatic watering occurred. Sets this as 
 	return render_template('main.html', **templateData)
 
+@app.route("/water_once")
+def WaterOnce():
+    templateData = template()
+    print("===> Watering once!")
+    watering.ForceWater()
+    return render_template('main.html', **templateData)
+
+@app.route("/auto_watering/ON")
+def AutoWaterOn():
+    print("===> Auto watering on")
+    templateData = template()
+    return render_template("main.html", **templateData)
+
+@app.route("/auto_watering/OFF")
+def AutoWaterOff():
+    print("===> Auto watering off")
+    templateData = template()
+    return render_template("main.html", **templateData)
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80, debug=True)
+    watering.ForceWaterOff()
+    print("===> Starting main")
+    app.run(host='0.0.0.0', port=5000, debug=True)
