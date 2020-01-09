@@ -2,6 +2,8 @@ from flask import Flask, render_template, redirect, url_for
 import datetime
 import watering
 import calendar
+import psutil
+import os
 
 # Using constructor to create a new flask object
 app = Flask(__name__)
@@ -41,24 +43,54 @@ def main():
 
 @app.route("/water_once")
 def WaterOnce():
-    templateData = template()
-    print("===> Watering once!")
-    watering.ForceWater()
-    return render_template('main.html', **templateData)
+	templateData = template()
+	print("===> Watering once!")
+	watering.ForceWater()
+	return render_template('main.html', **templateData)
+
+
 
 @app.route("/auto_watering/ON")
 def AutoWaterOn():
-    print("===> Auto watering on")
-    templateData = template()
-    return render_template("main.html", **templateData)
+	print("===> Auto watering on")
+	templateData = template()
+	isRunning = False
+	for process in psutil.process_iter():
+		try:
+			if process.cmdline()[1] == 'watering.py':
+				isRunning = True
+		except:
+			pass
+	if not isRunning:
+		print("===> STARTING the process NOW")
+		os.system("python3 watering.py &")
+	else:
+		print("===> Process is ALREADY RUNNING")
+	return render_template("main.html", **templateData)
+
+
 
 @app.route("/auto_watering/OFF")
 def AutoWaterOff():
-    print("===> Auto watering off")
-    templateData = template()
-    return render_template("main.html", **templateData)
+	print("===> Auto watering off")
+	templateData = template()
+	watering.ForceWaterOff()
+	isRunning = False
+	for process in psutil.process_iter():
+		try:
+			if process.cmdline()[1] == 'watering.py':
+				isRunning = True
+		except:
+			pass
+	if not isRunning:
+		print("===> Process is ALREADY OFF")
+	else:
+		print("===> STOPPING the process NOW")
+		os.system("pkill -f watering.py")
+	return render_template("main.html", **templateData)
 
 if __name__ == "__main__":
-    watering.ForceWaterOff()
-    print("===> Starting main")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+	watering.ForceWaterOff()
+	print("===> Starting main")
+	app.run(host='0.0.0.0', port=5000, debug=True)
+
