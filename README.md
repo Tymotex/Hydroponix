@@ -1,7 +1,7 @@
 # Hydroponix
 An IoT automated plant watering system using the Raspberry Pi Zero W. The working principle is simple — when the soil moisture sensor 
 
-Components used: 5-12V submersible DC motor, soil moisture sensor, electromechanical relay module, humidity and temperature sensor (DHT22)
+Components used: 5-12V submersible DC motor, soil moisture sensor, electromechanical relay module, humidity and temperature sensor (DHT22), USB 3.0 breakout boards
 <Fritz schematic here>
 
 Currently implemented:
