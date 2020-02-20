@@ -5,7 +5,6 @@ import calendar
 import psutil
 import os
 
-# Using constructor to create a new flask object
 app = Flask(__name__)
 
 # Forms a dictionary of data to write into the main HTML file
@@ -90,7 +89,7 @@ def AutoWaterOff():
 	return render_template("main.html", **templateData)
 
 if __name__ == "__main__":
-	watering.ForceWaterOff()
-	print("===> Starting main")
-	app.run(host='0.0.0.0', port=5000, debug=True)
+    watering.ForceWaterOff()
+    print("===> Starting main")
+    app.run(host='0.0.0.0', port=5000, debug=True)
 
