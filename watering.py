@@ -58,10 +58,14 @@ if __name__ == '__main__':
 			print("===> Disabled")
 
 def ForceWater():
-        ForceWaterOn()
+        print("===> FORCEWATER ON")
+        off(relayTrigger)
+        on(statusLED)
         sleep(1)
-        ForceWaterOff()
+        on(relayTrigger)
+        off(statusLED)
 
+# Deprecated?
 def ForceWaterOn():
 	print("===> FORCEWATER ON")
 	off(relayTrigger)
@@ -72,13 +76,3 @@ def ForceWaterOff():
         on(relayTrigger)
         on(statusLED)
 
-def EnableAutoWatering():
-        print("===> Enabling auto watering")
-
-
-def DisableAutoWatering():
-        pritn("===> Disabling auto watering")
-
-def GetLastWatered():
-	print("===> Getting last watered")
-	return "Never!"
