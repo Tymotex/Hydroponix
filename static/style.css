@@ -1,9 +1,15 @@
 body {
 	background: linear-gradient(#e66465, #9198e5);	
 	background-image: url("https://images.unsplash.com/photo-1483793435732-7047c6f91194?ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80");
+	background-size: cover;
 }
 
 h1 {
 	color: green;
+}
+
+.mainContainer {
+	background-color: white;
+	border: 1px blue solid;
 }
 
