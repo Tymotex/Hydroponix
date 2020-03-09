@@ -12,7 +12,7 @@ Components: 5-12V submersible DC motor, soil moisture sensor, 5V electromechanic
 - Automated HTTP POST requests is working and able to send image files and sensor data to timz.dev/Hydroponix
 
 ### Work in progress and planned features:
-- Sending snapshots at regular intervals is currently disabled. Need to fix the paths and have a designated camera output folder
+- Sending snapshots at regular intervals is currently disabled. Need to fix the paths to have a designated camera output folder and manage local dependencies (LCDDriver)
 - Be able to pull average sensor readings each hour from the database
 - Use data visualisation libraries on sensor data
 
