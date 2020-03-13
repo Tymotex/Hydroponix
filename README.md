@@ -1,8 +1,14 @@
-# Hydroponix
+# Hydroponix [WIP]
 An IoT automated plant propagation system built with Python on the Raspberry Pi Zero W with influxDB, Flask, Bootstrap 4, requests, psutil, Adafruit_DHT, picamera and more.
 
 Components: 5-12V submersible DC motor, soil moisture sensor, 5V electromechanical relay module, humidity and temperature sensor (DHT22), USB 3.0 breakout boards, LCD1602 16x2 with I2C backpack, HC-SR501 passive infrared motion sensor
 <Fritz schematic here>
+
+### Usage:
+```python3
+python3 main.py 3600 # Sends 1 data snapshot per hour  
+```
+
 
 ### Currently implemented:
 - All electronic components working with watering.py: soil moisture sensor can be successfully read, motor can be flicked on and off, humidity and ambient temperature can be read reliably
