@@ -15,6 +15,7 @@ Components: 5-12V submersible DC motor, soil moisture sensor, 5V electromechanic
 - Sending snapshots at regular intervals is currently disabled. Need to fix the paths to have a designated camera output folder and manage local dependencies (LCDDriver)
 - Be able to pull average sensor readings each hour from the database
 - Use data visualisation libraries on sensor data
+- Use threading's Timer object to delegate LCD writing
 
 ### Bugs:
 - Humidity/temperature sensor is unable to successfully get both readings on every single call to the Adafruit_DHT.read function. The current workaround is to use a recursive function and recall until success. Could alternatively just take the average of the most recent 5 readings, for example
