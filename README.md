@@ -1,7 +1,7 @@
 # Hydroponix [WIP]
 An IoT automated plant propagation system built with Python on the Raspberry Pi Zero W with influxDB, Flask, Bootstrap 4, requests, psutil, Adafruit_DHT, picamera and more.
 
-Components: 5-12V submersible DC motor, soil moisture sensor, 5V electromechanical relay module, humidity and temperature sensor (DHT22), USB 3.0 breakout boards, LCD1602 16x2 with I2C backpack, HC-SR501 passive infrared motion sensor
+Components: 5V submersible brushless DC pump, soil moisture sensor, 5V electromechanical relay module, humidity and temperature sensor (DHT22), USB 3.0 breakout boards, LCD1602 16x2 with I2C backpack, HC-SR501 passive infrared motion sensor
 <Fritz schematic here>
 
 ### Usage:
@@ -25,3 +25,10 @@ python3 main.py 3600 # Sends 1 data snapshot per hour
 
 ### Bugs:
 - Humidity/temperature sensor is unable to successfully get both readings on every single call to the Adafruit_DHT.read function. The current workaround is to use a recursive function and recall until success. Could alternatively just take the average of the most recent 5 readings, for example
+
+### Pump Specifications:
+- Qiaoran QR50A
+- Brushless (longer working life and lower noise level compared to brushed motors)
+- Input: DC, 5V, 2.4W
+- Max liquid temperature: 100 degrees celcius
+- Water height max: 200cm
