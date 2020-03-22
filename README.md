@@ -6,7 +6,7 @@ Components: 5V submersible brushless DC pump, soil moisture sensor, 5V electrome
 
 ### Usage:
 ```
-Usage: main.py <snapshotIntervalInSecs>
+Usage: python3 main.py <snapshotIntervalInSecs>
 ```
 ```python3
 python3 main.py 3600 # Sends 1 data snapshot per hour  
