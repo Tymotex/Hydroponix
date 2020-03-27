@@ -1,8 +1,17 @@
 # Hydroponix [WIP]
-An IoT automated plant propagation system built with Python on the Raspberry Pi Zero W with InfluxDB, Flask, Bootstrap 4, requests, psutil, Adafruit_DHT, picamera and more.
+An IoT automated plant propagation system built with Python on the Raspberry Pi Zero W with InfluxDB, Flask, Bootstrap, requests, psutil, Adafruit_DHT, picamera and more.
 
+This project consists of two main parts: 
+1. A Flask server that hosts a dashboard that lets the user view current sensor readings, control the pump and enable/disable the automatic watering process
+2. A (daemon) process that automatically sends sensor data and camera output to timz.dev/hydroponix
 
 ### Usage:
+To start up the server:
+```
+python3 app.py <port> # Local hosting
+```
+
+To start posting data snapshots:
 ```
 Usage: python3 main.py <snapshotIntervalInSecs>
 ```
