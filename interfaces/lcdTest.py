@@ -14,12 +14,12 @@ display = lcddriver.lcd()
 try:
     while True:
         # Remember that your sentences can only be 16 characters long!
+        display.lcd_clear()
         display.lcd_display_string("Hydroponix", 1) # Write line of text to first line of display
         display.lcd_display_string("Snapshot", 2) # Write line of text to second line of display
         time.sleep(2)                                     # Give time for the message to be read
         display.lcd_clear()
         display.lcd_display_string("Hi timz.dev", 1)  # Refresh the first line of display with a different message
-        display.lcd_display_string("<3", 2)
         time.sleep(2)                                     # Give time for the message to be read
 
 except KeyboardInterrupt: # If there is a KeyboardInterrupt (when you press ctrl+c), exit the program and cleanup

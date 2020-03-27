@@ -63,7 +63,7 @@ def InfluxRead(influxQuery):
 
 def GetPhoto(camObject, picOutputPath):
     # Snapping a photo of the setup
-    camObject.vflip = True   # Fixes incorrect vertical orientation
+    camObject.vflip = False   # Fixes incorrect vertical orientation
     camObject.resolution = (1024, 768)
     camObject.start_preview(alpha=192)
     sleep(1)  # Allow buffer time
@@ -107,8 +107,8 @@ if __name__ == "__main__":
     if (len(sys.argv) > 1):  # Command line input handling should be more robust. TODO: look at more examples of how this is done
         snapshotInterval = int(sys.argv[1])
     else:
-        sys.stdout.write("Usage: main.py <snapshotIntervalInSecs>")
-    
+        sys.stdout.write("Setting snapshot interval to default (2 hours)")
+        snapshotInterval = 7200
     try:
         camera = PiCamera()
         while (True):

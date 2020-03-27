@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="/static/css/dashboard.css">
+        <link href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css" rel="stylesheet" media="screen">
+        <link rel="icon" href="/static/hydroponix-icon.png">
+        <title>Hydroponix Dashboard</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top topbar">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="#" class="navbar-brand">
+					<span class="visible-xs">TZ</span>
+					<span class="hidden-xs">Hydroponix Dashboard</span>
+				</a>
+				<p class="navbar-text">
+					<a href="#" class="sidebar-toggle">
+                        <i class="fa fa-bars"></i>
+                    </a>
+				</p>
+			</div>
+			<div class="navbar-collapse collapse" id="navbar-collapse-main">
+				<ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <button class="navbar-btn">
+                            <i class="fa fa-bell"></i>
+                        </button>
+                    </li>
+					<li class="dropdown">
+						<button class="navbar-btn" data-toggle="dropdown">
+							<img src="/static/hydroponix-icon.png" class="img-circle img-fluid" style="max-width: 30px;">
+						</button>
+						<ul class="dropdown-menu">
+							<li><a href="#">Account</a></li>
+							<li><a href="#">Dashboard</a></li>
+							<li class="nav-divider"></li>
+							<li><a href="#">Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<article class="wrapper">
+	    <aside class="sidebar">
+	        <ul class="sidebar-nav">
+			    <li class="active"><a href="#dashboard" data-toggle="tab"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+			    <li><a href="#configuration" data-toggle="tab"><i class="fa fa-cogs"></i> <span>Configuration</span></a></li>
+			    <li><a href="#users" data-toggle="tab"><i class="fa fa-users"></i> <span>Users</span></a></li>
+			    <li><a href="#mail" data-toggle="tab"><i class="fa fa-envelope"></i> <span>Mail</span></a></li>
+		    </ul>
+	    </aside>
+	    
+	    <section class="main">
+	        
+	        <section class="tab-content">
+	            
+	           <section class="tab-pane active fade in content" id="dashboard">
+	               
+	                <div class="row">
+	                   
+                        <div class="col-xs-6 col-sm-3">
+                            <img class="img-thumbnail" src="/static/img/first-half.jpg">
+	                    </div>
+	                    <div class="col-xs-6 col-sm-3">
+                            <img class="img-thumbnail" src="/static/img/overview.jpg">
+	                    </div>
+	                    <div class="col-xs-6 col-sm-3">
+                            <img class="img-thumbnail" src="/static/img/sprouts.jpg">
+	                    </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <img class="img-thumbnail" src="/static/img/hydroponix-snapshot.jpg">
+	                    </div>
+
+	                   <div class="col-xs-12 col-sm-9">
+	                       <div class="panel panel-default">
+	                           <div class="panel-heading">
+	                               Control Panel
+	                           </div>
+	                           <div class="panel-body">
+                                   <div class="row">
+                                        <div class="col-md-4 text-center">
+                                            <a href="/auto_watering/ON"><button class="btn btn-dark">Enable Auto-Watering</button></a>
+                                        </div>
+                                        <div class="col-md-4 text-center">
+                                            <a href="/auto_watering/OFF"><button class="btn btn-secondary">Disable Auto-Watering</button></a>
+                                        </div>
+                                        <div class="col-md-4 text-center">
+                                            <a href="/water_once"><button class="btn btn-warning">Force Water</button></a>
+                                        </div>
+                                   </div>
+	                           </div>
+	                       </div>
+	                   </div>
+	                   
+	                   <div class="col-xs-12 col-sm-3">
+	                       <div class="panel panel-default">
+	                           <div class="panel-heading">
+	                               Current Sensor Readings:
+	                           </div>
+	                           <div class="panel-body">
+                                    <h4> Humidity: </h4>
+                                    {{ humidity }} 
+                                    <h4> Temperature: </h4>
+                                    {{ temperature }}
+                               </div>
+	                       </div>
+	                   </div>
+	                   
+	               </div>
+	               
+	           </section>
+	           
+	           <section class="tab-pane fade" id="configuration">
+	               <nav class="subbar">
+			            <ul class="nav nav-tabs">
+				            <li class="active"><a href="#access" data-toggle="tab"><i class="fa fa-code"></i> <span>System</span></a></li>
+				            <li><a href="#roles" data-toggle="tab"><i class="fa fa-user"></i> <span>Roles</span></a></li>
+			            </ul>
+		            </nav>
+		            
+		            <section class="tab-content content">
+		                
+		                <section class="tab-pane active fade in" id="access">
+		                    
+                            <div class="row">
+                                <div class="col-xs-12">
+	                                <div class="panel panel-default">
+	                                    <div class="panel-heading">
+	                                        Something
+	                                    </div>
+	                                    <div class="panel-body">
+	                                        <br/><br/><br/><br/>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            
+	                            <div class="col-xs-12 col-sm-4">
+	                                <div class="panel panel-default">
+	                                    <div class="panel-heading">
+	                                        Something
+	                                    </div>
+	                                    <div class="panel-body">
+	                                        <br/><br/><br/><br/>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            
+	                            <div class="col-xs-12 col-sm-4">
+	                                <div class="panel panel-default">
+	                                    <div class="panel-heading">
+	                                        Something
+	                                    </div>
+	                                    <div class="panel-body">
+	                                        <br/><br/><br/><br/>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            
+	                            <div class="col-xs-12 col-sm-4">
+	                                <div class="panel panel-default">
+	                                    <div class="panel-heading">
+	                                        Something
+	                                    </div>
+	                                    <div class="panel-body">
+	                                        <br/><br/><br/><br/>
+	                                    </div>
+	                                </div>
+	                            </div>
+                            </div>
+		                    
+		                </section>
+		                
+		                <section class="tab-pane fade" id="roles">
+		                    
+		                    <div class="row">
+                                <div class="col-xs-12 col-sm-8 col-md-9">
+	                                <div class="panel panel-default">
+	                                    <div class="panel-heading">
+	                                        Something
+	                                    </div>
+	                                    <div class="panel-body">
+	                                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            
+	                            <div class="hidden-xs col-sm-4 col-md-3">
+	                                <div class="panel panel-default">
+	                                    <div class="panel-heading">
+	                                        Something
+	                                    </div>
+	                                    <div class="panel-body">
+	                                        <br/><br/><br/>
+	                                    </div>
+	                                </div>
+	                                
+	                                <div class="panel panel-default">
+	                                    <div class="panel-heading">
+	                                        Something
+	                                    </div>
+	                                    <div class="panel-body">
+	                                        <br/><br/><br/>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                       </div>
+		                </section>
+		                
+		            </section>
+		            
+	           </section>
+	           
+	           <section class="tab-pane fade" id="users">
+	               
+	           </section>
+	           
+	           <section class="tab-pane fade" id="mail">
+	               
+	           </section>
+	           
+	        </section>
+	        
+	        
+	                
+	        
+	    </section>
+	    
+	</article>
+    </body>
+
+</html>
