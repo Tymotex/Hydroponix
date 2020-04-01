@@ -5,7 +5,7 @@ This project consists of two main parts:
 1. A Flask server that hosts a dashboard that lets the user view current sensor readings, control the pump and enable/disable the automatic watering process
 2. A (daemon) process that automatically sends sensor data and camera output to timz.dev/hydroponix
 
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+![Image of Yaktocat](https://raw.githubusercontent.com/Tymotex/Hydroponix/master/Dashboard.jpg)
 
 ### Usage:
 To start up the server:
