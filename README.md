@@ -32,7 +32,7 @@ python3 main.py      # Sends 1 data snapshot every 2 hours (default interval)
 - Automated HTTP POST requests are able to capture camera output and send image files with humidity and temperature readings to timz.dev/Hydroponix
 - Data snapshots are stored inside an instance of InfluxDB which is running locally
 
-### Work in progress and planned features:
+### Planned features:
 - Be able to pull average sensor readings each hour from the database
 - Use data visualisation libraries on sensor data
 - Use threading's Timer object for LCD functions
