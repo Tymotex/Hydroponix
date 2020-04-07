@@ -5,6 +5,8 @@ This project consists of two main parts:
 1. A Flask server that hosts a dashboard that lets the user view current sensor readings, control the pump and enable/disable the automatic watering process
 2. A (daemon) process that automatically sends sensor data and camera output to timz.dev/hydroponix
 
+![Image of Yaktocat](https://raw.githubusercontent.com/Tymotex/Hydroponix/master/Dashboard.jpg)
+
 ### Usage:
 To start up the server:
 ```
@@ -30,7 +32,7 @@ python3 main.py      # Sends 1 data snapshot every 2 hours (default interval)
 - Automated HTTP POST requests are able to capture camera output and send image files with humidity and temperature readings to timz.dev/Hydroponix
 - Data snapshots are stored inside an instance of InfluxDB which is running locally
 
-### Work in progress and planned features:
+### Planned features:
 - Be able to pull average sensor readings each hour from the database
 - Use data visualisation libraries on sensor data
 - Use threading's Timer object for LCD functions
