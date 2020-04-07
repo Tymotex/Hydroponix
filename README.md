@@ -12,7 +12,6 @@ To start up the server:
 ```
 python3 app.py <port> # Local hosting
 ```
-
 To start posting data snapshots:
 ```
 Usage: python3 main.py <snapshotIntervalInSecs>
@@ -23,6 +22,25 @@ python3 main.py 3600 # Sends 1 data snapshot per hour
 ```python3
 python3 main.py      # Sends 1 data snapshot every 2 hours (default interval)  
 ```
+
+Help:
+```
+usage: main.py [-h] [-o] [-a AUTO_INTERVAL] snapshot_title
+
+CLI for sending data snapshot
+
+positional arguments:
+  snapshot_title        Title of this snapshot
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o, --oneshot         Send once and terminate afterwards
+  -a AUTO_INTERVAL, --auto-interval AUTO_INTERVAL
+                        Send regular snapshots at a specified time interval
+
+Happy hacking :)
+```
+
 
 ### Currently implemented:
 - All electronic components are properly coordinated. The soil moisture sensor can be successfully read, the water pump can be flicked on and off via the relay, the humidity and ambient temperature can be acquired reliably
