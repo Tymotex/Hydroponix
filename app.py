@@ -5,6 +5,7 @@ import calendar
 import psutil
 import os
 import logging
+import sys
 import main
 
 app = Flask(__name__)
@@ -87,5 +88,5 @@ def AutoWaterOff():
 if __name__ == "__main__":
     watering.ResetState()
     logging.info("Starting main")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=int(sys.argv[1]), debug=True)
 

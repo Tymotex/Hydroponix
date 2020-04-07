@@ -1,4 +1,5 @@
 from time import time, sleep
+import statistics
 import datetime
 import sys
 import requests
@@ -6,6 +7,7 @@ import Adafruit_DHT
 import RPi.GPIO as GPIO
 import os
 import logging
+import argparse
 import pprint
 from influxdb import InfluxDBClient
 from picamera import PiCamera
@@ -57,7 +59,7 @@ def InfluxRead(influxQuery):
     # Connect to the influxDB instance running locally
     client = InfluxDBClient('localhost', 8086, 'root', 'root', 'hydroponix')
     # Fetching the data back from the database (TODO: should do some preprocessing here. Eg. get the average over last 5 trials)
-    result = client.query("select * from temperature_and_humidity;")
+    result = client.query(influxQuery)
     dataPoints = list(result.get_points(measurement="temperature_and_humidity"))
     return dataPoints
 
@@ -70,23 +72,43 @@ def GetPhoto(camObject, picOutputPath):
     camObject.capture(picOutputPath)
     camObject.stop_preview()
 
-def HTTPPost(postURL, picPath, weatherData):
+def HTTPPost(postURL, picPath, weatherData, snapshotTitle):
     postDataBody = {
-        "title": "Snapshot From Pi Zero",
-        "content": "The temperature is {} and the humidity is {}%".format(weatherData["temperature"], weatherData["humidity"])
+        "title": snapshotTitle,
+        "content": "The temperature is {}°C and the humidity is {}%.".format(weatherData["temperature"], weatherData["humidity"])
     }
     postFiles = {
         "photo": open(picPath, "rb")
     }
     r = requests.post(url = postURL, data = postDataBody, files = postFiles)
 
-def SendDataSnapshot(cameraObject):
+def SendDataSnapshot(cameraObject, snapshotTitle):
     # Get the weather data
     weatherData = GetHumidityAndTemp()
         
     # Writes the current data snapshot into influxdb and fetches back a list of datapoints
     InfluxWrite(weatherData)
-    dataPoints = InfluxRead("SELECT * FROM temperautre_and_humidity")
+    result = InfluxRead('''
+        SELECT * FROM temperature_and_humidity ORDER BY "time" LIMIT 25;
+    ''')
+    
+    compiledTemp = []
+    compiledHumidity = []
+    for datapoint in result:
+        compiledTemp.append(float(datapoint["temperature"]))
+        compiledHumidity.append(float(datapoint["humidity"]))
+
+    medHumidity = statistics.median(compiledTemp)
+    medTemp = statistics.median(compiledHumidity)
+    avgHumidity = statistics.mean(compiledTemp)
+    avgTemp = statistics.mean(compiledHumidity)
+    logging.info("""
+        ===== Latest 25 data snapshot stats =====
+        Mean humidity: {}%, 
+        Mean temperature: {}°C,
+        Median humidity: {}%
+        Meadian temperature: {}°C
+    """.format(avgHumidity, avgTemp, medHumidity, medTemp))
 
     # Getting a physical photo through the camera module
     picPath = "pic.jpg"
@@ -94,26 +116,41 @@ def SendDataSnapshot(cameraObject):
 
     # Making the HTTP POST request to /Hydroponix to upload a new data snapshot to the mongo database
     postURL = "https://timz.dev/Hydroponix"
-    HTTPPost(postURL, picPath, weatherData)
+    HTTPPost(postURL, picPath, weatherData, snapshotTitle)
 
-    for eachPoint in dataPoints:
-        pass
+    #for eachPoint in dataPoints:
+    #    pass
         # pprint.pprint(eachPoint, width=1)    # TODO: should only print latest 10 datapoints fetched from influxdb
     os.remove("pic.jpg")  # Removing the snapped picture
 
    
 if __name__ == "__main__":
-    snapshotInterval = 0
-    if (len(sys.argv) > 1):  # Command line input handling should be more robust. TODO: look at more examples of how this is done
-        snapshotInterval = int(sys.argv[1])
-    else:
-        sys.stdout.write("Setting snapshot interval to default (2 hours)")
-        snapshotInterval = 7200
+    arg_parser = argparse.ArgumentParser(description="CLI for sending data snapshot", epilog="Happy hacking :)")
+    arg_parser.add_argument("-o", "--oneshot",
+                            action="store_true",
+                            help="Send once and terminate afterwards")
+    arg_parser.add_argument("-a", "--auto-interval",
+                            action="store",
+                            help="Send regular snapshots at a specified time interval",
+                            type=int,
+                            nargs=1,
+                            default=3600)
+    arg_parser.add_argument("snapshot_title",
+                            metavar="snapshot_title",
+                            type=str,
+                            help="Title of this snapshot")
+    args = arg_parser.parse_args()
+    
+    snapshotInterval = args.auto_interval[0] if isinstance(args.auto_interval, list) else args.auto_interval
+    snapshotTitle = args.snapshot_title
     try:
         camera = PiCamera()
         while (True):
             logging.info("Sending a data snapshot now! (interval is {0})".format(snapshotInterval))
-            SendDataSnapshot(camera)
+            SendDataSnapshot(camera, snapshotTitle)
+            if (args.oneshot):
+                logging.info("Oneshot mode was true. Quitting")
+                break
             sleep(snapshotInterval)
     except KeyboardInterrupt:
         try:
@@ -121,6 +158,4 @@ if __name__ == "__main__":
             os.remove("pic.jpg")  # Removing the snapped picture
         except FileNotFoundError:
             pass
-
-
 
