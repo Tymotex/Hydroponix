@@ -75,7 +75,15 @@ def GetPhoto(camObject, picOutputPath):
 def HTTPPost(postURL, picPath, weatherData, snapshotTitle):
     postDataBody = {
         "title": snapshotTitle,
-        "content": "The temperature is {}°C and the humidity is {}%.".format(weatherData["temperature"], weatherData["humidity"])
+        "content": """
+        This snapshot: the temperature is {}°C and the humidity is {}%.
+        Summary of the previous 25 snapshots:
+        the average temperature is {}°C,
+        the average humidity is {}%,
+        the median temperature is {}°C,
+        the median humidity is: {}%.
+        """.format(weatherData["temperature"], weatherData["humidity"], weatherData["avgTemp"],
+                   weatherData["avgHumidity"], weatherData["medTemp"], weatherData["medHumidity"])
     }
     postFiles = {
         "photo": open(picPath, "rb")
@@ -107,7 +115,7 @@ def SendDataSnapshot(cameraObject, snapshotTitle):
         Mean humidity: {}%, 
         Mean temperature: {}°C,
         Median humidity: {}%
-        Meadian temperature: {}°C
+        Median temperature: {}°C
     """.format(avgHumidity, avgTemp, medHumidity, medTemp))
 
     # Getting a physical photo through the camera module
@@ -116,6 +124,10 @@ def SendDataSnapshot(cameraObject, snapshotTitle):
 
     # Making the HTTP POST request to /Hydroponix to upload a new data snapshot to the mongo database
     postURL = "https://timz.dev/Hydroponix"
+    weatherData["avgHumidity"] = avgHumidity
+    weatherData["avgTemp"] = avgTemp
+    weatherData["medHumidity"] = medHumidity
+    weatherData["medTemp"] = medTemp
     HTTPPost(postURL, picPath, weatherData, snapshotTitle)
 
     #for eachPoint in dataPoints:
