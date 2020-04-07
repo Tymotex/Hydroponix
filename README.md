@@ -48,12 +48,12 @@ Happy hacking :)
 - Enable/disable auto-watering and force water functionality is working and is able to be controlled through the web interface. This was done through the psutil library
 - Able to send HTTP post requests to timz.dev/Hydroponix at regular intervals
 - Automated HTTP POST requests are able to capture camera output and send image files with humidity and temperature readings to timz.dev/Hydroponix
-- Data snapshots are stored inside an instance of InfluxDB which is running locally
+- Data snapshots are stored inside an instance of InfluxDB which is running locally. Latest 25 readings are summarised as mean and median values and logged to stdout
+- CLI with flags for 'oneshot' mode and 'automated' mode
 
 ### Planned features:
-- Be able to pull average sensor readings each hour from the database
-- Use data visualisation libraries on sensor data
-- Use threading's Timer object for LCD functions
+- Extend the visuals of the dashboard. Use data visualisation libraries on sensor data (maybe D3)
+- Use threading's Timer object for LCD functions or use some other method to manage LCD writing
 
 ### Current Issues:
 - Humidity/temperature sensor is unable to successfully get both readings on every single call to the Adafruit_DHT.read function. The current workaround is to use a recursive function and recall until success. Could alternatively just take the average of the most recent 5 readings, for example
