@@ -8,22 +8,19 @@ This project consists of two main parts:
 ![Image of Yaktocat](https://raw.githubusercontent.com/Tymotex/Hydroponix/master/Dashboard.jpg)
 
 ### Usage:
-To start up the server:
+To start up the Flask server to host the dashboard:
 ```
 python3 app.py <port> # Local hosting
 ```
 To start posting data snapshots:
-```
-Usage: python3 main.py <snapshotIntervalInSecs>
+```python3
+python3 hydro-data-auto.py -a 3600 "My snapshot" # Sends 1 data snapshot per hour  
 ```
 ```python3
-python3 main.py 3600 # Sends 1 data snapshot per hour  
-```
-```python3
-python3 main.py      # Sends 1 data snapshot every 2 hours (default interval)  
+python3 hydro-data-auto.py -o "My snapshot" # Sends 1 data snapshot and terminates  
 ```
 
-Help:
+--help:
 ```
 usage: main.py [-h] [-o] [-a AUTO_INTERVAL] snapshot_title
 
@@ -40,7 +37,6 @@ optional arguments:
 
 Happy hacking :)
 ```
-
 
 ### Currently implemented:
 - All electronic components are properly coordinated. The soil moisture sensor can be successfully read, the water pump can be flicked on and off via the relay, the humidity and ambient temperature can be acquired reliably
