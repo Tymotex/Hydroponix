@@ -1,6 +1,6 @@
 Adafruit-DHT==1.4.0
 asn1crypto==0.24.0
-certifi==2018.8.24
+certifi==2022.12.7
 chardet==3.0.4
 Click==7.0
 cryptography==2.6.1
